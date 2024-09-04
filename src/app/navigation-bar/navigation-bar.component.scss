@@ -1,0 +1,58 @@
+/* Reset styles for consistent appearance */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li a {
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #555;
+}
+
+nav form {
+  display: inline-block;
+}
+
+nav form input[type="text"] {
+  padding: 5px;
+}
+
+nav form button {
+  padding: 5px 10px;
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+nav form button:hover {
+  background-color: #777;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav form {
+    margin-top: 10px;
+  }
+}

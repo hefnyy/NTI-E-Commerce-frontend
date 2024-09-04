@@ -1,0 +1,50 @@
+<!-- Signup Page -->
+<div style="max-width: 400px; margin: 50px auto; padding: 20px; background-color: #f5f5f5; border-radius: 10px;">
+  <h2 style="text-align: center; margin-bottom: 20px;">Sign Up</h2>
+  <h2 class="text-center">{{signupForm.get('email')?.errors|json}}</h2>
+
+  <form [formGroup]="signupForm">
+    <div style="margin-bottom: 15px;">
+      <label>Full Name</label>
+      <input formControlName="name" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+      <div style="color: red;">
+        <p class="text-danger">Name is required</p>
+        <p>Name length must be between 3,20</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Email</label>
+      <input formControlName="email" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+
+
+
+    <div style="margin-bottom: 15px;">
+      <label>Phone Number</label>
+      <input formControlName="phoneNumber"
+        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+
+
+    <div style="margin-bottom: 15px;">
+      <label>Password</label>
+      <input formControlName="Password" type="password"
+        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+
+
+    <div style="margin-bottom: 15px;">
+      <label>Confirm Password</label>
+      <input formControlName="confirmPassword" type="password"
+        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit"
+      style="width: 100%; padding: 10px; background-color: #3528a7; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      Sign Up
+    </button>
+
+  </form>
+</div>
