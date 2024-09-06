@@ -14,21 +14,22 @@ export class NavigationBarComponent implements OnInit {
   isLogin: boolean = false;
   constructor(private _authenaticationService: AuthenaticationsService, private _Router: Router){}
 
-  ngOnInit(){
+
+  logout(){
+    this._authenaticationService.logout();
+    this._Router.navigate(['/login'])
+  }
+  ngOnInit() {
     // if(this._authenaticationService.loggedInUser!==null)
     //   this.isLogin=true;
     // else
     //   this.isLogin=false;
     this._authenaticationService.loggedInUser.subscribe(() => {
-      if(this._authenaticationService.loggedInUser.getValue() !== null)
+      if (this._authenaticationService.loggedInUser.getValue() !== null)
         this.isLogin = true;
       else
-        this.isLogin = false;     
+        this.isLogin = false;
     })
     console.log(this.isLogin);
-  }
-  logout(){
-    this._authenaticationService.logout();
-    this._Router.navigate(['/login'])
   }
 }

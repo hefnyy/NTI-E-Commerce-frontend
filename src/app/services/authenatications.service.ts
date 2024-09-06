@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SignUp,Login } from '../interfaces/authenatications';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -9,12 +9,15 @@ import {jwtDecode} from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenaticationsService {
+export class AuthenaticationsService  {
   HostName: string = 'http://localhost:3000';
   RouteName: string = '/api/v1/authentication';
   loggedInUser=new BehaviorSubject(null);
   
-  constructor(private _HttpClient: HttpClient, _Router: Router) { }
+  constructor(private _HttpClient: HttpClient,private _Router: Router) { 
+    if (localStorage.getItem('userToken') !== null)
+      this.saveLoggedInUser();
+   }
   
   saveLoggedInUser(){
     const token:any=localStorage.getItem('userToken');
@@ -33,4 +36,13 @@ export class AuthenaticationsService {
     this.loggedInUser.next(null);
     
   };
+
+  checkToken(){
+    const token: any = localStorage.getItem('userToken');
+    const decodedToken = jwtDecode(token);
+    if(decodedToken.exp! > Date.now()/1000)
+      this.logout();
+    this._Router.navigate(['/login']);
+  };
+
 }

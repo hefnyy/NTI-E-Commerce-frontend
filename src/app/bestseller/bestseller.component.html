@@ -1,0 +1,24 @@
+<!-- Banner-->
+<div class="container-fluid d-flex justify-content-center p-0">
+  <img [src]="cover" alt="Banner" class="img-fluid"
+    style=" width: 75%; height: 300px; ">
+</div>
+
+<div class="row m-auto container mt-4">
+@for(product of products; track product._id){
+    <div class="card m-2 col-4" style="width: 18rem;">
+      <img [src]="coverDomain+product.cover" class="card-img-top w-100 h-50" alt="product.name">
+      <div class="card-body position-relative">
+        <h5 class="card-title">{{product.name}}</h5>
+        <p class="card-text">{{product.description|description:10}}...</p>
+        <p class="card-text">price : {{product.price|currency}}</p>
+        <p class="card-text">{{product.ratingAverage}} &star; - count {{product.ratingCount}}</p>
+        <div class="position-absolute btn-card">
+          <a [routerLink]="['/products',product._id]" class="btn btn-primary mx-2">See More</a>
+          <button (click)="addProductToCart(product._id)" class="btn btn-success mx-2">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+}
+  
+</div>

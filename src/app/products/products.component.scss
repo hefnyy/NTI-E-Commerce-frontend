@@ -1,0 +1,19 @@
+.btn-card {
+  bottom: 3%;
+  left: 5%;
+}
+.pagination .page-link {
+  color: #3528a7;
+  /* Your theme color */
+}
+
+.pagination .page-link:hover {
+  background-color: #3528a7;
+  color: white;
+}
+
+.pagination .active .page-link {
+  background-color: #3528a7;
+  border-color: #3528a7;
+  color: white;
+}

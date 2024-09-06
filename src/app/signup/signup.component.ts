@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenaticationsService } from '../services/authenatications.service';
@@ -12,7 +12,7 @@ import { compileNgModule } from '@angular/compiler';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
-export class SignupComponent {
+export class SignupComponent  {
 
   constructor(private _AuthenaticationsServices: AuthenaticationsService,private _Router: Router,) { }
 
@@ -27,11 +27,12 @@ export class SignupComponent {
   emailErrors:string='';
   passwordErrors:string='';
   phoneNumberErrors:string='';
+  subscription:any;
 
   signUp(formData: FormGroup) {
     // alert('sign up form')
     console.log(formData.value);
-    this._AuthenaticationsServices.signUp(formData.value).subscribe((res) => {
+    this.subscription = this._AuthenaticationsServices.signUp(formData.value).subscribe((res) => {
       console.log(res.token);
 
       if(res.token){

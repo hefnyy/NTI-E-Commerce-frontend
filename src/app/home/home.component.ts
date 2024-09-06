@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { BestsellerComponent } from "../bestseller/bestseller.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [BestsellerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

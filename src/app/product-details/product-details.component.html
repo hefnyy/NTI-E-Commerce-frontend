@@ -1,0 +1,387 @@
+<h1 class="text-center mb-4 text-white" style="background-color:#333;">Product Details</h1>
+<!-- Main Container -->
+<div class="container my-5">
+  <div class="row">
+
+    <!-- Product Image and Thumbnails Section -->
+    <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="position-relative">
+        <!-- Main Image -->
+        <img class="img-fluid rounded shadow-sm" [src]="coverDomain+product?.cover" [alt]="product.name"
+          data-bs-toggle="modal" data-bs-target="#imageModal">
+        <!-- Thumbnails -->
+        <div class="thumbnails mt-2 d-flex justify-content-center">
+          @for(image of product?.images; track image){
+          <img class="img-thumbnail mx-1" [src]="coverDomain+image" [alt]="product.name"
+            style="width: 60px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imageModal"
+            (click)="updateMainImage(coverDomain+image)">
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Details Section -->
+    <div class="col-lg-6">
+      <div class="p-4 border rounded shadow-sm">
+        <!-- Category & Title -->
+        <h3 class="text-primary">{{product?.category?.name}}</h3>
+        <h5 class="text-primary">{{product?.subcategory?.name}}</h5>
+        <h1 class="my-3">{{product?.name}}</h1>
+
+        <!-- Pricing and Rating -->
+        <div class="my-3">
+          <h4 class="text-success">{{product?.price | currency}}</h4>
+          <p class="text-muted">Additional tax may apply on checkout</p>
+          <div class="rating my-2">
+            <span class="text-warning">
+              <i class="fa fa-star"></i> @if(product.ratingAverage){ {{product?.ratingAverage}}} 
+              @else{  0}
+            </span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex gap-2">
+          <button (click)="addProductToWishlist(product._id)" class="btn btn-outline-primary flex-grow-1">Add to Wishlist</button>
+          <button (click)="addProductToCart(product._id)" class="btn btn-success flex-grow-1">Add to Cart</button>
+        </div>
+
+        <!-- Product Details -->
+        <div class="mt-4">
+          <h5 class="text-primary">Product Description:</h5>
+          <p>{{product?.description}}</p>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="mt-4 p-3 border rounded bg-light d-flex align-items-center">
+          <i class="fa-brands fa-rocketchat fa-2x text-primary me-3"></i>
+          <p class="mb-0">Have a question? Contact our representatives via live chat or email.</p>
+        </div>
+
+        <!-- Delivery Section -->
+        <div class="mt-4">
+          <p><i class="fa-solid fa-truck text-success"></i> Delivery within 3 days from the date of purchase</p>
+          <p class="text-muted">Order now to get this product delivered soon!</p>
+        </div>
+
+        <!-- Delivery Options -->
+        <div class="mt-4">
+          <p><i class="fa-solid fa-box text-primary"></i> Delivery Options</p>
+          <p class="text-muted">View available delivery options here</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Product Image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="" class="img-fluid" alt="Product Image">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript to handle image updates -->
+<script>
+  function updateMainImage(src) {
+    document.getElementById('modalImage').src = src;
+  }
+</script>
+
+
+
+<!-- <script>
+  function updateMainImage(src) {
+    document.getElementById('modalImage').src = src;
+  }
+</script>
+modalImage
+<div class="container my-5">
+  <div class="row">
+
+    <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="position-relative">
+        <img class="img-fluid rounded shadow-sm" [src]="coverDomain+product?.cover" [alt]="product.name"
+          data-bs-toggle="modal" data-bs-target="#imageModal">
+        <div class="thumbnails mt-2 d-flex justify-content-center">
+          @for(image of product?.images; track image){
+          <img class="img-thumbnail mx-1" [src]="coverDomain+image" [alt]="product.name"
+            style="width: 60px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imageModal"
+            (click)="updateMainImage(coverDomain+image)">
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="p-4 border rounded shadow-sm">
+        <h3 class="text-primary">{{product?.category?.name}}</h3>
+        <h5 class="text-primary">{{product?.subcategory?.name}}</h5>
+        <h1 class="my-3">{{product?.name}}</h1>
+
+        <div class="my-3">
+          <h4 class="text-success">{{product?.price | currency}}</h4>
+          <p class="text-muted">Additional tax may apply on checkout</p>
+          <div class="rating my-2">
+            <span class="text-warning">
+              <i class="fa fa-star"></i> {{product?.ratingAverage}} &star;
+            </span>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-primary flex-grow-1">Add to Wishlist</button>
+          <button class="btn btn-success flex-grow-1">Add to Cart</button>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="text-primary">Product Details</h5>
+          <p>{{product?.description}}</p>
+        </div>
+
+        <div class="mt-4 p-3 border rounded bg-light d-flex align-items-center">
+          <i class="fa-brands fa-rocketchat fa-2x text-primary me-3"></i>
+          <p class="mb-0">Have a question? Contact our representatives via live chat or email.</p>
+        </div>
+
+        <div class="mt-4">
+          <p><i class="fa-solid fa-truck text-success"></i> Delivery within 3 days from the date of purchase</p>
+          <p class="text-muted">Order now to get this product delivered soon!</p>
+        </div>
+
+        <div class="mt-4">
+          <p><i class="fa-solid fa-box text-primary"></i> Delivery Options</p>
+          <p class="text-muted">View available delivery options here</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Product Image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="" class="img-fluid" alt="Product Image">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- JavaScript to handle image updates -->
+
+
+
+
+<!-- <div class="container my-5">
+  <div class="row">
+
+    <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="position-relative">
+        <img class="img-fluid rounded shadow-sm" [src]="coverDomain+product?.cover" [alt]="product.name">
+        <div class="thumbnails mt-2 d-flex justify-content-center">
+          @for(image of product?.images; track image){
+          <img class="img-thumbnail mx-1" [src]="coverDomain+image" [alt]="product.name"
+            style="width: 60px; cursor: pointer;">
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="p-4 border rounded shadow-sm">
+        <h3 class="text-primary">{{product?.category?.name}}</h3>
+        <h5 class="text-primary">{{product?.subcategory?.name}}</h5>
+        <h1 class="my-3">{{product?.name}}</h1>
+
+        <div class="my-3">
+          <h4 class="text-success">{{product?.price | currency}}</h4>
+          <p class="text-muted">Additional tax may apply on checkout</p>
+          <div class="rating my-2">
+            <span class="text-warning">
+              <i class="fa fa-star"></i> {{product?.ratingAverage}} &star;
+            </span>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-primary flex-grow-1">Add to Wishlist</button>
+          <button class="btn btn-success flex-grow-1">Add to Cart</button>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="text-primary">Product Details</h5>
+          <p>{{product?.description}}</p>
+        </div>
+
+        <div class="mt-4 p-3 border rounded bg-light d-flex align-items-center">
+          <i class="fa-brands fa-rocketchat fa-2x text-primary me-3"></i>
+          <p class="mb-0">Have a question? Contact our representatives via live chat or email.</p>
+        </div>
+
+        <div class="mt-4">
+          <p><i class="fa-solid fa-truck text-success"></i> Delivery within 3 days from the date of purchase</p>
+          <p class="text-muted">Order now to get this product delivered soon!</p>
+        </div>
+
+        <div class="mt-4">
+          <p><i class="fa-solid fa-box text-primary"></i> Delivery Options</p>
+          <p class="text-muted">View available delivery options here</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- <div class="container my-5">
+  <div class="row">
+
+    <div class="col-md-5">
+      <div class="main-img position-relative">
+        <img class="img-fluid rounded shadow-sm mb-3" [src]="coverDomain+product?.cover" [alt]="product.name">
+        <div class="row previews">
+          @for(image of product?.images; track image){
+          <div class="col-3 px-1">
+            <img class="img-thumbnail" [src]="coverDomain+image" [alt]="product.name" style="cursor: pointer;">
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <div class="main-description px-4">
+        <p class="text-uppercase font-weight-bold text-primary">{{product?.category?.name}}</p>
+        <h2 class="product-title my-3">{{product?.name}}</h2>
+
+        <div class="price-area my-4">
+          <p class="new-price text-bold display-4">{{product?.price | currency}}</p>
+          <p class="text-secondary">(Additional tax may apply on checkout)</p>
+          <p class="rating my-3 text-warning h4">
+            <i class="fa fa-star"></i> {{product?.ratingAverage}} &star;
+          </p>
+        </div>
+
+        <div class="buttons d-flex my-4 gap-2">
+          <button class="btn btn-outline-primary btn-lg flex-grow-1 shadow">Add to Wishlist</button>
+          <button class="btn btn-success btn-lg flex-grow-1 shadow">Add to Cart</button>
+        </div>
+
+        <div class="product-details mt-4">
+          <h4 class="details-title mb-2 text-primary">Product Details</h4>
+          <p class="description">{{product?.description}}</p>
+        </div>
+
+        <div class="row questions bg-light p-3 rounded my-4">
+          <div class="col-md-1 icon">
+            <i class="fa-brands fa-rocketchat fa-2x text-primary"></i>
+          </div>
+          <div class="col-md-11">
+            <p>Have a question about our products at E-Store? Feel free to contact our representatives via live chat or
+              email.</p>
+          </div>
+        </div>
+
+        <div class="delivery mt-4">
+          <p class="font-weight-bold"><i class="fa-solid fa-truck"></i> Delivery within 3 days from the date of purchase
+          </p>
+          <p class="text-secondary">Order now to get this product delivered soon!</p>
+        </div>
+
+        <div class="delivery-options mt-4">
+          <p class="font-weight-bold"><i class="fa-solid fa-box"></i> Delivery Options</p>
+          <p class="text-secondary">View available delivery options here</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- 
+<div class="container my-5"></div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="main-img">
+        <img class="img-fluid" [src]="coverDomain+product?.cover" [alt]="product.name">
+        <div class="row my-3 previews">
+          @for(image of product?.images; track image){
+          <div class="col-md-3 my-1">
+            <img class="w-100" [src]="imagesDomain+image" [alt]="product.name">
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <div class="main-description px-2">
+        <div class="category text-bold">{{product?.subcategory?.name}}</div>
+        <div class="product-title text-bold my-3">{{product?.name}}</div>
+        <div class="price-area my-4">
+          <p class="new-price text-bold mb-1">{{product?.price|currency}}</p>
+          <p class="text-secondary mb-1">(Additional tax may apply on checkout)</p>
+          <p class="new-price text-bold mb-1">{{product?.ratingAverage}} &star;</p>
+        </div>
+
+        <div class="buttons d-flex my-5">
+          <div class="block">
+            <button  class="shadow btn btn btn-primary ">Add to Wishlist</button>
+          </div>
+          <div class="block">
+            <button class="shadow btn btn btn-success">Add to cart</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="product-details my-4">
+        <p class="details-title text-color mb-1">Product Details</p>
+        <p class="description">{{product?.description}}</p>
+      </div>
+
+      <div class="row questions bg-light p-3">
+        <div class="col-md-1 icon">
+          <i class="fa-brands fa-rocketchat questions-icon"></i>
+        </div>
+        <div class="col-md-11 text">
+          Have a question about our products at E-Store? Feel free to contact our representatives via live chat or
+          email.
+        </div>
+      </div>
+
+      <div class="delivery my-4">
+        <p class="font-weight-bold mb-0"><span><i class="fa-solid fa-truck"></i></span> <b>Delivery done in 3 days from
+            date of purchase</b> </p>
+        <p class="text-secondary">Order now to get this product delivery</p>
+      </div>
+
+      <div class="delivery-options my-4">
+        <p class="font-weight-bold mb-0"><span><i class="fa-solid fa-filter"></i></span> <b>Delivery options</b> </p>
+        <p class="text-secondary">View delivery options here</p>
+      </div>
+
+    </div>
+  </div> -->

@@ -1,0 +1,140 @@
+<!-- Banner-->
+<!-- <div class="container-fluid d-flex justify-content-center p-0">
+  <img [src]="cover" alt="Banner" class="img-fluid" style=" width: 75%; height: 300px; ">
+</div> -->
+
+<h1 class="text-center mb-4 text-white" style="background-color:#333;">All Products</h1>
+
+<div class="row container m-auto">
+  @for(product of products; track product._id){
+  <div class="card m-2 col-4" style="width: 19rem;min-height: 32rem;">
+    <img [src]="coverDomain+product.cover" class="card-img-top" style="height: 250px; object-fit: contain;"
+      alt="{{product.name}}">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text text-truncate">{{product.description}}</p>
+      <p class="card-text">Price: {{product.price | currency}}</p>
+      <p class="card-text">{{product.ratingAverage}} &star; ({{product.ratingCount}} reviews)</p>
+      <div class="mt-auto">
+        <a [routerLink]="['/products',product._id]" class="btn btn-primary w-100 mb-2">See More</a>
+        <button (click)="addProductToCart(product._id)" class="btn btn-success w-100">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+<!-- Pagination Controls -->
+<div class="d-flex justify-content-center mt-4">
+  @if(pagination.currentPage!==1){
+  <button (click)="changeNumberOfPage(pagination.currentPage!-1)" class="btn btn-secondary mx-2">Previous</button>
+  }
+  <span class="mx-2">Page {{pagination.currentPage}} of {{pagination.totalPages}} </span>
+
+  @if(pagination.next){
+  <button (click)="changeNumberOfPage(pagination.currentPage!+1)" class="btn btn-secondary mx-2">Next</button>
+  }
+
+<!-- <div class="d-flex justify-content-center mt-5">
+  @if(pagination.currentPage !== 1){
+  <button (click)="changeNumberOfPage(pagination.currentPage!-1)" class="btn btn-outline-primary mx-2">Previous</button>
+  }
+  <span class="mx-3 align-self-center">Page {{pagination.currentPage}} of {{pagination.totalPages}}</span>
+  @if(pagination.next){
+  <button (click)="changeNumberOfPage(pagination.currentPage!+1)" class="btn btn-outline-primary mx-2">Next</button>
+  }
+</div> -->
+
+
+<!-- <h1 class="text-center mb-4">All Products</h1>
+
+<div class="row container m-auto">
+  @for(product of products; track product._id){
+  <div class="card m-2 col-4" style="width: 19rem;min-height: 32rem;">
+    <img [src]="coverDomain+product.cover" class="card-img-top" style="height: 250px; object-fit: cover;"
+      alt="{{product.name}}">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text text-truncate">{{product.description}}</p>
+      <p class="card-text">Price: {{product.price | currency}}</p>
+      <p class="card-text">{{product.ratingAverage}} &star; ({{product.ratingCount}} reviews)</p>
+      <div class="mt-auto">
+        <a routerLink="" class="btn btn-primary w-100 mb-2">See More</a>
+        <button class="btn btn-success w-100">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+  @if(pagination.currentPage !== 1){
+  <button (click)="changeNumberOfPage(pagination.currentPage!-1)" class="btn btn-outline-primary mx-2">Previous</button>
+  }
+  <span class="mx-3 align-self-center">Page {{pagination.currentPage}} of {{pagination.totalPages}}</span>
+  @if(pagination.next){
+  <button (click)="changeNumberOfPage(pagination.currentPage!+1)" class="btn btn-outline-primary mx-2">Next</button>
+  }
+</div> -->
+
+
+
+
+
+
+<!-- <h1 class="text-center">All Products </h1>
+
+<div class="row m-auto container mt-4">
+  @for(product of products; track product._id){
+  <div class="card m-2 col-4" style="width: 18rem;min-height: 32rem;">
+    <img [src]="coverDomain+product.cover" class="card-img-top w-100 h-50" alt="product.name">
+    <div class="card-body position-relative">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">{{product.description|description:10}}...</p>
+      <p class="card-text">price : {{product.price|currency}}</p>
+      <p class="card-text">{{product.ratingAverage}} &star; - count {{product.ratingCount}}</p>
+      <div class="position-absolute btn-card">
+        <a routerLink="" class="btn btn-primary mx-2">See More</a>
+        <button class="btn btn-success mx-2">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  }
+
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+  @if(pagination.currentPage!==1){
+  <button (click)="changeNumberOfPage(pagination.currentPage!-1)" class="btn btn-secondary mx-2">Previous</button>
+  }
+  <span class="mx-2">Page  {{pagination.currentPage}}  of  {{pagination.totalPages}} </span>
+  
+  @if(pagination.next){
+    <button (click)="changeNumberOfPage(pagination.currentPage!+1)" class="btn btn-secondary mx-2">Next</button>
+  }
+</div> -->
+
+
+
+
+
+<!-- Pagination Controls -->
+<!-- <div class="d-flex justify-content-center mt-4">
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous" >
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item" >
+        <a class="page-link"  > i + 1 </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link"  aria-label="Next" >
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div> -->
