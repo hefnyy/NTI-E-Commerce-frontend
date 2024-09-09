@@ -1,1 +1,33 @@
-<p>wishlist works!</p>
+<h1 class="text-center mb-4 text-white" style="background-color:#333;"> My Wishlist</h1>
+
+<div class="container my-5">
+  <!-- Wishlist Items Section -->
+  <div class="row" >
+    @for (product of wishlist; track product.id) {
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <img class="card-img-top img-fluid" [src]="productImage + product?.cover" alt="image">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{product?.name}}</h5>
+          <p class="card-text text-black">{{product?.description | description:15}}...</p>
+          <p class="card-text text-muted">{{product?.subcategory?.name}}</p>
+          <p class="card-text" style="color: rgba(255, 153, 0, 0.996);">{{ product?.price | currency }}</p>          <div class="mt-auto">
+            <button class="btn btn-dark w-100 mb-2" >
+              <i (click)="addToCart(product._id)" class="fa fa-shopping-cart me-2"></i>Move to Cart
+            </button>
+            <button (click)="removeFromWishlist(product._id)" class="btn btn-outline-danger w-100" >
+              <i class="fa fa-trash me-2"></i>Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Empty Wishlist Message -->
+  <div *ngIf="wishlistLength === 0" class="text-center">
+    <h4 class="text-muted">Your Wishlist is currently empty.</h4>
+    <a routerLink="/products" class="btn btn-outline-primary mt-3">Browse Products</a>
+  </div>
+  </div>

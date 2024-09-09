@@ -5,19 +5,25 @@ import { SignUp,Login } from '../interfaces/authenatications';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import {jwtDecode} from 'jwt-decode';
+import { GlobalServicesService } from './global-services.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenaticationsService  {
-  HostName: string = 'http://localhost:3000';
-  RouteName: string = '/api/v1/authentication';
+  HostName: string = '' ;
+  RouteName: string = '';
   loggedInUser=new BehaviorSubject(null);
   
-  constructor(private _HttpClient: HttpClient,private _Router: Router) { 
+  constructor(private _HttpClient: HttpClient,private _Router: Router, private _GlobalServices: GlobalServicesService) { 
+    this.HostName = this._GlobalServices.hostName;
+    this.RouteName = this._GlobalServices.AuthenaticationRouteName;
+    
     if (localStorage.getItem('userToken') !== null)
       this.saveLoggedInUser();
+
    }
+  
   
   saveLoggedInUser(){
     const token:any=localStorage.getItem('userToken');
@@ -33,8 +39,21 @@ export class AuthenaticationsService  {
   }
   logout(){
     localStorage.removeItem('userToken');
-    this.loggedInUser.next(null);
-    
+    this.loggedInUser.next(null);    
+  };
+
+  sendEmail(formData: Login): Observable<any> {
+
+    return this._HttpClient.post(`${this.HostName}${this.RouteName}/forgetmypassword`, formData);
+
+  };
+
+  verifyCode(formData: Login): Observable<any> {
+    return this._HttpClient.post(`${this.HostName}${this.RouteName}/verifyresetcode`, formData, { headers: { authorization: `Bearer ${localStorage.getItem('verify')}` } });
+  };
+
+  changePassword(formData: Login): Observable<any> {
+    return this._HttpClient.put(`${this.HostName}${this.RouteName}/resetcodepasswordchange`, formData, { headers: { authorization: `Bearer ${localStorage.getItem('verify')}` } });
   };
 
   checkToken(){
@@ -42,7 +61,7 @@ export class AuthenaticationsService  {
     const decodedToken = jwtDecode(token);
     if(decodedToken.exp! > Date.now()/1000)
       this.logout();
-    this._Router.navigate(['/login']);
+    this._Router.navigate(['/home']);
   };
 
 }

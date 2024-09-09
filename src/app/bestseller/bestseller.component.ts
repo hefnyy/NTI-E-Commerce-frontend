@@ -26,6 +26,7 @@ export class BestsellerComponent implements OnInit,OnDestroy {
     this._CartsService.addProductToCart(productId).subscribe((res) => {
       console.log(res.data);
     });
+    alert('This product has been added to your cart');
   }
 
   ngOnInit(): void {

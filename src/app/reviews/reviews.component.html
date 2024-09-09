@@ -1,0 +1,44 @@
+<h1 class="text-center mb-4 text-white" style="background-color:#333;">My Reviews</h1>
+<div style="background-color:#333;" class="container  text-white py-4">
+  
+  <hr class="my-3 border-light">
+  <table class="w-100 text-light">
+    <thead>
+      <tr class="border-bottom border-light">
+        <th>Product</th>
+        <th>Review</th>
+        <th>Rating</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(review of reviews; track review._id){
+      <tr class="m-5 border-bottom border-light">
+        <td>
+          <img class="mx-3 rounded" width="50px" [src]="coverDomain + review.product.cover"
+            [alt]="review?.product?.name">
+          <span class="text-white">{{ review?.product?.name }}</span>
+        </td>
+        <td>{{ review?.comment }}</td>
+        <td>{{ review?.rating }}</td>
+        <td>
+          <a class="btn btn-outline-light btn-sm rounded-3 mx-3">Update</a>
+          <button (click)="deleteReview(review._id)" class="btn btn-danger btn-sm rounded-3">Delete</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<!-- Pagination Controls -->
+<div class="d-flex justify-content-center mt-4 text-white">
+  @if(pagination.currentPage !== 1){
+  <button (click)="changeNumberOfPage(pagination.currentPage!-1)" class="btn btn-outline-light mx-2">Previous</button>
+  }
+  <span class="mx-2">Page {{pagination.currentPage}} of {{pagination.totalPages}}</span>
+
+  @if(pagination.next){
+  <button (click)="changeNumberOfPage(pagination.currentPage!+1)" class="btn btn-outline-light mx-2">Next</button>
+  }
+</div>

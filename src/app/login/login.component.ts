@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { AuthenaticationsService } from '../services/authenatications.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { Login } from '../interfaces/authenatications';
@@ -8,7 +8,7 @@ import { Login } from '../interfaces/authenatications';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [ReactiveFormsModule, JsonPipe,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -25,7 +25,8 @@ export class LoginComponent   {
   })
 
   login(formData:FormGroup){
-    this.subscription = this._AuthenaticationsServices.login(formData.value).subscribe((res) => {
+    this.subscription = this._AuthenaticationsServices.login(formData.value).subscribe({
+      next: (res) => {
       if(res.token){
         localStorage.setItem('userToken',res.token);
         this._AuthenaticationsServices.saveLoggedInUser();
@@ -33,8 +34,8 @@ export class LoginComponent   {
       this._Router.navigate(['/home'])
       
     },
-    (err) => {
+    error: (err) => {
       this.invalidLogin = err.error.message;
-    })
+    }})
   }
 }

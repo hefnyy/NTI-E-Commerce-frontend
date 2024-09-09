@@ -4,21 +4,21 @@
     style=" width: 75%; height: 300px; ">
 </div>
 
-<div class="row m-auto container mt-4">
-@for(product of products; track product._id){
-    <div class="card m-2 col-4" style="width: 18rem;">
-      <img [src]="coverDomain+product.cover" class="card-img-top w-100 h-50" alt="product.name">
-      <div class="card-body position-relative">
-        <h5 class="card-title">{{product.name}}</h5>
-        <p class="card-text">{{product.description|description:10}}...</p>
-        <p class="card-text">price : {{product.price|currency}}</p>
-        <p class="card-text">{{product.ratingAverage}} &star; - count {{product.ratingCount}}</p>
-        <div class="position-absolute btn-card">
-          <a [routerLink]="['/products',product._id]" class="btn btn-primary mx-2">See More</a>
-          <button (click)="addProductToCart(product._id)" class="btn btn-success mx-2">Add to Cart</button>
-        </div>
+<div class="row container m-auto">
+  @for(product of products; track product._id){
+  <div class="card m-2 col-4" style="width: 19rem;min-height: 32rem;">
+    <img [src]="coverDomain+product.cover" class="card-img-top" style="height: 250px; object-fit: contain;"
+      alt="{{product.name}}">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text text-truncate">{{product.description}}</p>
+      <p class="card-text">Price: {{product.price | currency}}</p>
+      <p class="card-text">{{product.ratingAverage}} &star; ({{product.ratingCount}} reviews)</p>
+      <div class="mt-auto">
+        <a [routerLink]="['/products',product._id]" class="btn btn-primary w-100 mb-2">See More</a>
+        <button (click)="addProductToCart(product._id)" class="btn btn-success w-100">Add to Cart</button>
       </div>
     </div>
-}
-  
+  </div>
+  }
 </div>

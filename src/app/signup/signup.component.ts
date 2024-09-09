@@ -14,8 +14,6 @@ import { compileNgModule } from '@angular/compiler';
 })
 export class SignupComponent  {
 
-  constructor(private _AuthenaticationsServices: AuthenaticationsService,private _Router: Router,) { }
-
   signupForm = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     email: new FormControl(null, [Validators.required, Validators.email]),
@@ -24,10 +22,14 @@ export class SignupComponent  {
     confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)])
   })
 
-  emailErrors:string='';
-  passwordErrors:string='';
-  phoneNumberErrors:string='';
-  subscription:any;
+  emailErrors: string = '';
+  passwordErrors: string = '';
+  phoneNumberErrors: string = '';
+  subscription: any;
+
+  constructor(private _AuthenaticationsServices: AuthenaticationsService,private _Router: Router,) { }
+
+
 
   signUp(formData: FormGroup) {
     // alert('sign up form')
@@ -48,11 +50,11 @@ export class SignupComponent  {
         if(error.path == 'password')
           this.passwordErrors = error.msg;
         if (error.path == 'phoneNumber')
-          this.phoneNumberErrors = error.msg;            
+          this.phoneNumberErrors = error.msg;
       })
-      console.log(this.emailErrors);
-      console.log(this.passwordErrors);
-      console.log(this.phoneNumberErrors);       
+      // console.log(this.emailErrors);
+      // console.log(this.passwordErrors);
+      // console.log(this.phoneNumberErrors);
     })
   }
 };
