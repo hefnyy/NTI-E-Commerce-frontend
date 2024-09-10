@@ -54,5 +54,6 @@ export class ReviewsComponent implements OnDestroy,OnInit {
     this.loadReviews();
   }
 
-  ngOnDestroy(): void { this.subscription.unsubscribe() };
+  ngOnDestroy(): void { 
+    this.subscription.unsubscribe() };
 }

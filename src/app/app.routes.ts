@@ -9,6 +9,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ForgetmypasswordComponent } from './forgetmypassword/forgetmypassword.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
   {path:'', redirectTo:'home',pathMatch:'full'},
@@ -18,7 +19,8 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   {path:'login',component:LoginComponent},
   { path: 'wishlist', canActivate: [authenaticationGuard], component: WishlistComponent },
-  { path: 'reviews', canActivate: [authenaticationGuard], component: ReviewsComponent },
+  { path: 'myreviews', canActivate: [authenaticationGuard], component: ReviewsComponent },
+  { path: 'cart', canActivate: [authenaticationGuard], component: CartComponent },
   { path: 'forgetmypassword', component: ForgetmypasswordComponent },
   {path:'**',component:NotFoundComponent}
 

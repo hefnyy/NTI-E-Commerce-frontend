@@ -1,0 +1,82 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { GlobalServicesService } from '../services/global-services.service';
+import { AuthenaticationsService } from '../services/authenatications.service';
+import { CartsService } from '../services/carts.service';
+import { CurrencyPipe } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-cart',
+  standalone: true,
+  imports: [CurrencyPipe,ReactiveFormsModule],
+  templateUrl: './cart.component.html',
+  styleUrl: './cart.component.scss'
+})
+export class CartComponent implements OnDestroy,OnInit {
+
+  subscription: any;
+  cart: any = {};
+  productsLength: number = 0;
+  productImage: string = ''
+  deliveryFees: number = 100;
+  promoCodeError: string = '';
+
+  loginForm = new FormGroup({
+    name: new FormControl(null, [Validators.required]),
+  })
+
+  constructor(private _AuthenaticationService: AuthenaticationsService, private _Router:Router,
+    private _GlobalService: GlobalServicesService, private _CartService: CartsService) { }
+
+    loadCart(){
+      this.subscription = this._CartService.getUserCart().subscribe({
+        next: (res) => {
+          this.cart = res.data;
+          this.productsLength = res.length;
+        }, error: (err) => {
+
+        }
+      })
+    }
+
+    removeProductFromCart(productId:string){
+      this._CartService.removeProductFromCart(productId).subscribe({
+        next:(params) => {
+          this.loadCart();
+          alert('Product has been removed from the cart')
+          
+        }
+      , error:(params) => {
+        
+      }
+    })
+    }
+
+    applyPromoCode(formData:FormGroup){
+      this._CartService.applyPromoCode(formData.value).subscribe({
+        next: (res) => { this.loadCart() },
+        error: (err) => { this.promoCodeError = err.error.message }
+      })
+    }
+
+  clearCart() {
+    this._CartService.clearCart().subscribe({
+      next: (res) => {
+        alert('Cart has been Cleared')
+        this._Router.navigate(['/home'])
+      }, error: (err) => { },
+    })
+  }
+
+    ngOnInit(): void {
+      // this._AuthenaticationService.checkToken();
+      this.productImage = this._GlobalService.ProductCoverDomain;
+      this.loadCart();
+    }
+
+    ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+    }
+  }
+

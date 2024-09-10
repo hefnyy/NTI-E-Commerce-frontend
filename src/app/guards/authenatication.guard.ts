@@ -10,7 +10,7 @@ export const authenaticationGuard: CanActivateFn = (route, state) => {
   if(_AuthenaticationService.loggedInUser.getValue()!== null)
     return true;
   else{
-    _Router.navigate(['/login']);
+    _Router.navigate(['/home']);
     alert('You have to login first to access this route');
     return false;
   }

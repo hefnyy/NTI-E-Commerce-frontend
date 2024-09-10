@@ -19,8 +19,8 @@ export class AuthenaticationsService  {
     this.HostName = this._GlobalServices.hostName;
     this.RouteName = this._GlobalServices.AuthenaticationRouteName;
     
-    if (localStorage.getItem('userToken') !== null)
-      this.saveLoggedInUser();
+    if (localStorage.getItem('userToken') !== null) 
+      this.saveLoggedInUser()
 
    }
   
@@ -56,12 +56,13 @@ export class AuthenaticationsService  {
     return this._HttpClient.put(`${this.HostName}${this.RouteName}/resetcodepasswordchange`, formData, { headers: { authorization: `Bearer ${localStorage.getItem('verify')}` } });
   };
 
-  checkToken(){
+  checkToken() {
     const token: any = localStorage.getItem('userToken');
     const decodedToken = jwtDecode(token);
-    if(decodedToken.exp! > Date.now()/1000)
-      this.logout();
-    this._Router.navigate(['/home']);
-  };
+    if (decodedToken.exp! < Date.now() / 1000) {
+      this.logout()
+      this._Router.navigate(['/home'])
+    }
+  }
 
 }
