@@ -43,6 +43,7 @@ export class WishlistComponent implements OnInit,OnDestroy {
   }
 
   addToCart(productId: string) {
+    // console.log('inside add to cart');
     this._CartService.addProductToCart(productId).subscribe({
       next: (res) => {
         alert('Product has been Added to Cart')

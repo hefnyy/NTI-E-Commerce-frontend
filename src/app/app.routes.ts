@@ -10,6 +10,8 @@ import { ForgetmypasswordComponent } from './forgetmypassword/forgetmypassword.c
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { CartComponent } from './cart/cart.component';
+import { OrdersComponent } from './orders/orders.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
 
 export const routes: Routes = [
   {path:'', redirectTo:'home',pathMatch:'full'},
@@ -21,6 +23,8 @@ export const routes: Routes = [
   { path: 'wishlist', canActivate: [authenaticationGuard], component: WishlistComponent },
   { path: 'myreviews', canActivate: [authenaticationGuard], component: ReviewsComponent },
   { path: 'cart', canActivate: [authenaticationGuard], component: CartComponent },
+  { path: 'myorders', canActivate: [authenaticationGuard], component: OrdersComponent },
+  { path: 'myprofile', canActivate: [authenaticationGuard], component: MyprofileComponent },
   { path: 'forgetmypassword', component: ForgetmypasswordComponent },
   {path:'**',component:NotFoundComponent}
 

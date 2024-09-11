@@ -1,5 +1,4 @@
 <!-- Navigation Bar -->
-
 <nav style="background-color:#333; padding: 10px;">
   <div style="display: flex; justify-content: space-between; align-items: center;">
 
@@ -13,12 +12,15 @@
     <ul style="list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;">
       <li><a [routerLink]="['/']" style="color:white; text-decoration:none;">Home</a></li>
       <li><a [routerLink]="['/products']" style="color:white; text-decoration:none;">Products</a></li>
+      @if(isLogin){
       <li><a [routerLink]="['/about']" style="color:white; text-decoration:none;">About</a></li>
       <li><a [routerLink]="['/wishlist']" style="color:white; text-decoration:none;">Wishlist</a></li>
       <li><a [routerLink]="['/myreviews']" style="color:white; text-decoration:none;">Reviews</a></li>
+      <li><a [routerLink]="['/myorders']" style="color:white; text-decoration:none;">Orders</a></li>
+      }
     </ul>
 
-    <!-- Signup, Login, Logout, Cart -->
+    <!-- Signup, Login, Logout, Cart, and User Info -->
     <div style="display: flex; gap: 10px; align-items: center;">
       @if(!isLogin){
       <a [routerLink]="['/signup']" style="color:white; text-decoration:none;">Signup</a>
@@ -26,13 +28,18 @@
       }
       @if(isLogin){
 
-        <!-- Cart Icon Button -->
-        <a [routerLink]="['/cart']" style="color:white; text-decoration:none; margin-left: 10px;">
-          <i class="fas fa-shopping-cart"></i>
-        </a>
+      <!-- Cart Icon Button -->
+      <a [routerLink]="['/cart']" style="color:white; text-decoration:none; margin-left: 10px;">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
 
-        <a (click)="logout()" style="color:white; text-decoration:none; cursor: pointer;">Logout</a>
-     }
+      <!-- User Info Icon Button -->
+      <a [routerLink]="['/myprofile']" style="color:white; text-decoration:none; margin-left: 10px;">
+        <i class="fas fa-user"></i>
+      </a>
+
+      <a (click)="logout()" style="color:white; text-decoration:none; cursor: pointer;">Logout</a>
+      }
     </div>
 
   </div>

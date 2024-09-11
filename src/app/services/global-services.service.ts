@@ -12,6 +12,8 @@ export class GlobalServicesService {
   CartsRouteName: string = '/api/v1/carts';
   WishlistRouteName: string = '/api/v1/wishlist';
   ReviewsRouteName: string = '/api/v1/reviews';
+  OrdersRouteName: string = '/api/v1/orders';
+  UsersRouteName: string = '/api/v1/users';
 
 
   constructor() { }

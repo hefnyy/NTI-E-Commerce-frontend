@@ -21,9 +21,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   subscription: any;
   page: number = 1;
   pagination: Pagination = {};
+
   // currentPage:number=1;
   // totalNumberOfPages:number=5;
-
 
   constructor(private _ProductsServices: ProductsService, private _CartsService: CartsService) { }
 

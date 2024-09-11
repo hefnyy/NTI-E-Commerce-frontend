@@ -12,8 +12,8 @@
           <p class="card-text text-black">{{product?.description | description:15}}...</p>
           <p class="card-text text-muted">{{product?.subcategory?.name}}</p>
           <p class="card-text" style="color: rgba(255, 153, 0, 0.996);">{{ product?.price | currency }}</p>          <div class="mt-auto">
-            <button class="btn btn-dark w-100 mb-2" >
-              <i (click)="addToCart(product._id)" class="fa fa-shopping-cart me-2"></i>Move to Cart
+            <button (click)="addToCart(product._id)" class="btn btn-dark w-100 mb-2" >
+              <i  class="fa fa-shopping-cart me-2"></i>Move to Cart
             </button>
             <button (click)="removeFromWishlist(product._id)" class="btn btn-outline-danger w-100" >
               <i class="fa fa-trash me-2"></i>Remove

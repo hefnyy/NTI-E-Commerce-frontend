@@ -3,13 +3,14 @@ import { GlobalServicesService } from '../services/global-services.service';
 import { AuthenaticationsService } from '../services/authenatications.service';
 import { CartsService } from '../services/carts.service';
 import { CurrencyPipe } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { OrdersService } from '../services/orders.service';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CurrencyPipe,ReactiveFormsModule],
+  imports: [CurrencyPipe,ReactiveFormsModule,FormsModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
@@ -21,13 +22,20 @@ export class CartComponent implements OnDestroy,OnInit {
   productImage: string = ''
   deliveryFees: number = 100;
   promoCodeError: string = '';
+  // address: string='';
 
   loginForm = new FormGroup({
     name: new FormControl(null, [Validators.required]),
   })
+  promoCodeForm = new FormGroup({
+    name: new FormControl(null, [Validators.required]),
+  })
 
+  addressForm = new FormGroup({
+    address: new FormControl(null, [Validators.required]),
+  })
   constructor(private _AuthenaticationService: AuthenaticationsService, private _Router:Router,
-    private _GlobalService: GlobalServicesService, private _CartService: CartsService) { }
+    private _GlobalService: GlobalServicesService, private _CartService: CartsService, private _OrdersService:OrdersService) { }
 
     loadCart(){
       this.subscription = this._CartService.getUserCart().subscribe({
@@ -69,6 +77,18 @@ export class CartComponent implements OnDestroy,OnInit {
     })
   }
 
+  createOrder(formData:FormGroup){
+    // console.log('inside create order');
+    this._OrdersService.createOrder(formData.value).subscribe({
+      next: (res) => {
+        alert('Order has been Created');
+        this._Router.navigate(['/myorders']);
+      },error: (err) => {
+        
+      }
+    })
+  }
+
     ngOnInit(): void {
       // this._AuthenaticationService.checkToken();
       this.productImage = this._GlobalService.ProductCoverDomain;
@@ -77,6 +97,8 @@ export class CartComponent implements OnDestroy,OnInit {
 
     ngOnDestroy(): void {
       this.subscription.unsubscribe();
+      // console.log('destroy');
+      // console.log(this.address);
     }
   }
 
