@@ -12,6 +12,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { CartComponent } from './cart/cart.component';
 import { OrdersComponent } from './orders/orders.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
+import { UpdatereviewComponent } from './updatereview/updatereview.component';
 
 export const routes: Routes = [
   {path:'', redirectTo:'home',pathMatch:'full'},
@@ -22,6 +23,7 @@ export const routes: Routes = [
   {path:'login',component:LoginComponent},
   { path: 'wishlist', canActivate: [authenaticationGuard], component: WishlistComponent },
   { path: 'myreviews', canActivate: [authenaticationGuard], component: ReviewsComponent },
+  { path: 'myreviews/:id', canActivate: [authenaticationGuard], component: UpdatereviewComponent },
   { path: 'cart', canActivate: [authenaticationGuard], component: CartComponent },
   { path: 'myorders', canActivate: [authenaticationGuard], component: OrdersComponent },
   { path: 'myprofile', canActivate: [authenaticationGuard], component: MyprofileComponent },

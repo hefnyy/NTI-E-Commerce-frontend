@@ -29,15 +29,17 @@ export class ReviewsService {
       { headers: { authorization: `Bearer ${localStorage.getItem('userToken')}` } })
   }
 
-  updateUserReview(reviewId: string, formData: any): Observable<any> {
-    return this._HttpClient.put(`${this.HostName}${this.RouteName}/${reviewId}`, formData, { headers: { authorization: `Bearer ${localStorage.getItem('userToken')}` } })
+  updateUserReview(reviewId: string, comment: string,rating:number): Observable<any> {
+    return this._HttpClient.put(`${this.HostName}${this.RouteName}/${reviewId}`, {comment:comment,rating:rating}, { headers: { authorization: `Bearer ${localStorage.getItem('userToken')}` } })
   }
 
   deleteUserReview(reviewId: string): Observable<any> {
     return this._HttpClient.delete(`${this.HostName}${this.RouteName}/${reviewId}`, { headers: { authorization: `Bearer ${localStorage.getItem('userToken')}` } })
   }
 
-
+  getReview(reviewId: string,formData:any): Observable<any> {
+    return this._HttpClient.put(`${this.HostName}${this.RouteName}/${reviewId}`,formData, { headers: { authorization: `Bearer ${localStorage.getItem('userToken')}` } })
+  }
 
   
 }

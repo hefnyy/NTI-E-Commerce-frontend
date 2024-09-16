@@ -4,15 +4,17 @@
   <!-- Profile Section -->
   <div class="profile-section">
     <div class="profile-picture">
-      <img [src]="" alt="User Profile Picture">
+      <img [src]="userProfileImage+user.profileImage" alt="User Profile Picture">
     </div>
     <div class="profile-details">
-      <h2>userName</h2>
-      <p>Email: userEmail</p>
-      <p>Phone: userPhone</p>
-      <p>Address: userAddress</p>
+      <p>Email: {{user.email}}</p>
+      <p>Phone: {{user.phoneNumber}}</p>
+      <input class="form-control  m-auto my-2" type="text" (change)="getName(userName.value)" #userName placeholder="name" [value]="user.name">
+            <div class=" m-auto my-2">
+              <input class="form-control" (change)="getFile($event)" type="file" accept="image/*">
+            </div>
     </div>
-    <button class="btn edit-btn">Edit Profile</button>
+    <button (click)="updateUserData()" class="btn text-white bg-dark">Edit Profile</button>
   </div>
 
   <!-- Account Settings Section -->
@@ -22,15 +24,51 @@
       <div class="form-group">
         <label for="password">Current Password</label>
         <input formControlName="currentPassword" type="password"  placeholder="Enter Current password">
+      @if(changePasswordForm.get('currentPassword')?.errors!==null&&changePasswordForm.get('currentPassword')?.touched&&currentPasswordError===''){
+      <div class="text-danger ">
+        @if(changePasswordForm.get('currentPassword')?.errors?.['required']){
+          <p>Current Password is Required</p> }
+        @if(changePasswordForm.get('currentPassword')?.errors?.['minlength']||changePasswordForm.get('currentPassword')?.errors?.['maxlength'])
+        {<p>Current Password must be between 6,20</p> }
+      </div>
+      }
+      @if(currentPasswordError!==''){
+      <div class="text-danger ">
+        <p>{{currentPasswordError}}</p>
+      </div>
+      }
+               
       </div>
       <div class="form-group">
         <label for="password">Change Password</label>
         <input formControlName="password" type="password"  placeholder="Enter new password">
+          @if(changePasswordForm.get('password')?.errors!==null&&changePasswordForm.get('password')?.touched){
+          <div class="text-danger ">
+            @if(changePasswordForm.get('password')?.errors?.['required']){
+              <p>New Password is Required</p> }
+            @if(changePasswordForm.get('password')?.errors?.['minlength']||changePasswordForm.get('password')?.errors?.['maxlength'])
+            {<p>New Password must be between 6,20</p> }
+          </div>
+          }
       </div>
 
       <div class="form-group">
         <label for="confirmPassword">Confirm Password</label>
         <input formControlName="confirmPassword" type="password"  placeholder="Confirm new password">
+          @if(changePasswordForm.get('confirmPassword')?.errors!==null&&changePasswordForm.get('confirmPassword')?.touched&&passwordError===''){
+            <div class="text-danger ">
+              @if(changePasswordForm.get('confirmPassword')?.errors?.['required']){
+                <p>Confirm Password is Required</p> }
+              @if(changePasswordForm.get('confirmPassword')?.errors?.['minlength']||changePasswordForm.get('confirmPassword')?.errors?.['maxlength'])
+                {<p>Confirm Password must be between 6,20</p> }
+            </div>
+              }
+          @if(passwordError!==''){
+            <div class="text-danger ">
+              <p>{{passwordError}}</p>
+            </div>
+              }
+
       </div>
 
       <button [disabled]="changePasswordForm.invalid" class="btn text-white bg-dark">Save Changes</button>

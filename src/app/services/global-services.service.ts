@@ -14,6 +14,7 @@ export class GlobalServicesService {
   ReviewsRouteName: string = '/api/v1/reviews';
   OrdersRouteName: string = '/api/v1/orders';
   UsersRouteName: string = '/api/v1/users';
+  userProfileImage: string = `${this.hostName}/users/`
 
 
   constructor() { }

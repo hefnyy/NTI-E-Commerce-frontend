@@ -6,7 +6,7 @@
     <thead>
       <tr class="border-bottom border-light">
         <th>Product</th>
-        <th>Review</th>
+        <th>          Review</th>
         <th>Rating</th>
         <th></th>
       </tr>
@@ -19,10 +19,13 @@
             [alt]="review?.product?.name">
           <span class="text-white">{{ review?.product?.name }}</span>
         </td>
-        <td>{{ review?.comment }}</td>
-        <td>{{ review?.rating }}</td>
+        <td><input style="width: 75%; " class="border-bottom border-light form-control bg-dark text-white  my-2" type="text" (change)="getComment(comment.value)" #comment placeholder="comment"
+          [value]="review.comment"></td>
+
+        <td><input style="width: 75%;" class="border-bottom border-light form-control bg-dark text-white my-2" type="number"
+          [value]="review.rating" min="1" max="5" (input)="onRatingChange($event, review)" placeholder="Rating"></td>
         <td>
-          <a class="btn btn-outline-light btn-sm rounded-3 mx-3">Update</a>
+          <button (click)="updateReview(review._id)" class="btn btn-outline-light btn-sm rounded-3 mx-3">Update</button>
           <button (click)="deleteReview(review._id)" class="btn btn-danger btn-sm rounded-3">Delete</button>
         </td>
       </tr>

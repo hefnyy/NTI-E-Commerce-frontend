@@ -22,6 +22,7 @@ export class CartComponent implements OnDestroy,OnInit {
   productImage: string = ''
   deliveryFees: number = 100;
   promoCodeError: string = '';
+  addressErrors:string = '';
   // address: string='';
 
   loginForm = new FormGroup({
@@ -83,8 +84,13 @@ export class CartComponent implements OnDestroy,OnInit {
       next: (res) => {
         alert('Order has been Created');
         this._Router.navigate(['/myorders']);
-      },error: (err) => {
-        
+      }
+      ,error: (err) => {
+        JSON.stringify(err.error.errors);
+        err.error.errors.map((error: any) => {
+          if (error.path == 'address')
+            this.addressErrors = error.msg;          
+        })
       }
     })
   }
