@@ -6,6 +6,10 @@
 <h1 class="text-center mb-4 text-white" style="background-color:#333;">All Products</h1>
 
 <div class="row container m-auto">
+  <hr class="my-3 border-light text-white">
+  <div><input (change)="searchData(input.value)" #input class="w-80 form-control " type="text" placeholder="Search"
+      aria-label="Search"></div>
+  <hr class="my-3 border-light text-white">
   @for(product of products; track product._id){
   <div class="card m-2 col-4" style="width: 19rem;min-height: 32rem;">
     <img [src]="coverDomain+product.cover" class="card-img-top" style="height: 250px; object-fit: contain;"

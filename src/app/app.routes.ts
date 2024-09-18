@@ -15,20 +15,20 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
 import { UpdatereviewComponent } from './updatereview/updatereview.component';
 
 export const routes: Routes = [
-  {path:'', redirectTo:'home',pathMatch:'full'},
-  {path:'home',component:HomeComponent},
-  { path: 'products', component: ProductsComponent},
-  { path: 'products/:id', component: ProductDetailsComponent },
-  { path: 'signup', component: SignupComponent },
-  {path:'login',component:LoginComponent},
-  { path: 'wishlist', canActivate: [authenaticationGuard], component: WishlistComponent },
-  { path: 'myreviews', canActivate: [authenaticationGuard], component: ReviewsComponent },
-  { path: 'myreviews/:id', canActivate: [authenaticationGuard], component: UpdatereviewComponent },
-  { path: 'cart', canActivate: [authenaticationGuard], component: CartComponent },
-  { path: 'myorders', canActivate: [authenaticationGuard], component: OrdersComponent },
-  { path: 'myprofile', canActivate: [authenaticationGuard], component: MyprofileComponent },
-  { path: 'forgetmypassword', component: ForgetmypasswordComponent },
-  {path:'**',component:NotFoundComponent}
+  { path: '', title: 'NTI-E-Commerce', redirectTo:'home',pathMatch:'full'},
+  { path: 'home', title: 'NTI-E-Commerce', component:HomeComponent},
+  { path: 'products', title: 'NTI-E-Commerce', component: ProductsComponent},
+  { path: 'products/:id', title: 'NTI-E-Commerce', component: ProductDetailsComponent },
+  { path: 'signup', title: 'NTI-E-Commerce', component: SignupComponent },
+  { path: 'login', title: 'NTI-E-Commerce', component:LoginComponent},
+  { path: 'wishlist', title: 'NTI-E-Commerce', canActivate: [authenaticationGuard], component: WishlistComponent },
+  { path: 'myreviews', title: 'NTI-E-Commerce', canActivate: [authenaticationGuard], component: ReviewsComponent },
+  { path: 'myreviews/:id', title: 'NTI-E-Commerce', canActivate: [authenaticationGuard], component: UpdatereviewComponent },
+  { path: 'cart', title: 'NTI-E-Commerce', canActivate: [authenaticationGuard], component: CartComponent },
+  { path: 'myorders', title: 'NTI-E-Commerce', canActivate: [authenaticationGuard], component: OrdersComponent },
+  { path: 'myprofile', title: 'NTI-E-Commerce', canActivate: [authenaticationGuard], component: MyprofileComponent },
+  { path: 'forgetmypassword', title: 'NTI-E-Commerce', component: ForgetmypasswordComponent },
+  { path: '**', title: 'NTI-E-Commerce', component:NotFoundComponent}
 
 
 ];

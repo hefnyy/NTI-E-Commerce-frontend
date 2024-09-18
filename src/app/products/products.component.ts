@@ -45,6 +45,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
     alert(`This product has been added to your cart`);
   }
+
+  searchData(data: string) {
+    this.search = data;
+    this.loadProducts()
+  }
+
   ngOnInit(): void {
     this.coverDomain = this._ProductsServices.coverDomain;
     this.loadProducts();
